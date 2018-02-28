@@ -24,13 +24,23 @@ public class VigenereBreaker {
         return decryptedKeys;
     }
 
-    public void breakVigenere () {
+    public void breakVigenere() {
         FileResource fr = new FileResource();
         String encrypted = fr.asString();
         int [] keys = new int[5];
         keys = tryKeyLength(encrypted, 4, 'e');
         VigenereCipher vc = new VigenereCipher(keys);
         System.out.println(vc.decrypt(encrypted));        
+    }
+    
+    public HashSet<String> readDictionary(FileResource fr) {
+        HashSet<String> dictionary = new HashSet<String>();
+        String dictionaryString = fr.asString();
+        for (String word : dictionaryString.split("\\W")) {
+            dictionary.add(word);
+        }
+        return dictionary;
+        //.add() .contains()
     }
     
     public void tester() {
@@ -66,6 +76,7 @@ public class VigenereBreaker {
         int [] keys = new int[4];
         keys = tryKeyLength(encrypted, 4, 'e');
         System.out.println(Arrays.toString(keys));
+        System.out.println("readDictionary "
         //VigenereCipher newvigenere = new VigenereCipher(key);
         //System.out.println(newvigenere.decrypt(frr));        
 
