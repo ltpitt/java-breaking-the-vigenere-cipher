@@ -40,6 +40,30 @@ public class VigenereBreaker {
         return dictionary;
     }
     
+    /*
+    In the VigenereBreaker class, write the public method
+    countWords, which has two parameters—a String message,
+    and a HashSet of Strings dictionary.
+    This method should split the message into words (use 
+    .split(“\\W+”), which returns a String array), 
+    iterate over those words, and see how many of them are 
+    “real words”—that is, how many appear in the dictionary.
+    Recall that the words in dictionary are lowercase.
+    This method should return the integer count of how
+    many valid words it found.
+    */
+    public int countWords(String message, HashSet<String> dictionary) {
+        int foundWordsCount = 0;
+        String[] wordArray = new String[message.split("\\W+").length];
+        wordArray = message.split("\\W+");
+        for (String word : wordArray) {
+             if (dictionary.contains(word)){
+                 foundWordsCount ++;
+             }
+        }
+        return foundWordsCount;
+    }
+    
     public void tester() {
         System.out.println("Testing sliceString");
         String message;
@@ -73,10 +97,11 @@ public class VigenereBreaker {
         int [] keys = new int[4];
         keys = tryKeyLength(encrypted, 4, 'e');
         System.out.println(Arrays.toString(keys));
-        System.out.println("readDictionary:");
-        System.out.println(readDictionary(new FileResource()));
+        System.out.println("readDictionary:");        
+        HashSet<String> dictionary = readDictionary(new FileResource());
+        System.out.println(countWords("Buono giornata",dictionary));
+        //System.out.println(readDictionary(new FileResource()));
         //VigenereCipher newvigenere = new VigenereCipher(key);
         //System.out.println(newvigenere.decrypt(frr));        
-
     }
 }
