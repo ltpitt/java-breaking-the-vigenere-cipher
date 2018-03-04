@@ -1,5 +1,5 @@
 # Vigenère cipher breaker
-> This repo contains Java code to break the [https://en.wikipedia.org/wiki/Vigenère_cipher](Vigenère cipher).
+> This repo contains Java code to break the [Vigenère cipher](https://en.wikipedia.org/wiki/Vigenère_cipher).
 
 ## Prerequisites
 
