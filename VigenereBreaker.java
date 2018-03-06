@@ -25,12 +25,15 @@ public class VigenereBreaker {
     }
 
     public void breakVigenere() {
+        // Loading encrypted file
         FileResource fr = new FileResource();
         String encrypted = fr.asString();
-        int [] keys = new int[5];
-        keys = tryKeyLength(encrypted, 4, 'e');
-        VigenereCipher vc = new VigenereCipher(keys);
-        System.out.println(vc.decrypt(encrypted));        
+        // Loading dictionary file
+        FileResource frd = new FileResource();
+        // Reading dictionary file
+        HashSet<String> dictionary = readDictionary(frd);        
+        // Applying vigegnere break
+        breakForLanguage(encrypted, dictionary);
     }
     public HashSet<String> readDictionary(FileResource fr) {
         HashSet<String> dictionary = new HashSet<String>();
