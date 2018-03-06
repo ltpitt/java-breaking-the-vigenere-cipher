@@ -88,7 +88,7 @@ public class VigenereBreaker {
     
     public String breakForLanguage(String encrypted, HashSet<String> dictionary) {
         int max = 0;
-        char mostCommon = 'e';
+        char mostCommon = mostCommonCharIn(dictionary);
         String broken = "";
         HashMap<Integer, String> decryptions = new HashMap<Integer, String>();  
         for (int i = 1; i < 101; i++) {
@@ -140,6 +140,8 @@ public class VigenereBreaker {
         return mostCommonChar;
     }
     
+    public void breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> language) {
+    }
    
     public void tester() {
         System.out.println("Testing sliceString");
