@@ -33,7 +33,7 @@ public class VigenereBreaker {
         // Reading dictionary file
         HashSet<String> dictionary = readDictionary(frd);        
         // Applying vigegnere break
-        breakForLanguage(encrypted, dictionary);
+        System.out.println(breakForLanguage(encrypted, dictionary));
     }
     public HashSet<String> readDictionary(FileResource fr) {
         HashSet<String> dictionary = new HashSet<String>();
@@ -60,12 +60,13 @@ public class VigenereBreaker {
         String[] wordArray = new String[message.split("\\W+").length];
         wordArray = message.split("\\W+");
         for (String word : wordArray) {
-             if (dictionary.contains(word)){
+             if (dictionary.contains(word.toLowerCase())){
                  foundWordsCount ++;
              }
         }
         return foundWordsCount;
     }
+
     
     /*
     In the VigenereBreaker class, write the public method 
@@ -95,14 +96,51 @@ public class VigenereBreaker {
             VigenereCipher vc = new VigenereCipher(key);
             String decrypted = vc.decrypt(encrypted);
             int wordsInDictionary = countWords(decrypted, dictionary);
+            if (wordsInDictionary == 38) {
+                System.out.println("Valid word number for key length 38 is " + wordsInDictionary);
+            }
             if (wordsInDictionary > max) {
                 max = wordsInDictionary;
                 broken = decrypted;
+                System.out.println("Key is " + key.length);
+                System.out.println("Valid word number is " + wordsInDictionary);
             }
         }
         return broken;
     }
-        
+
+    public int maxIndex(int [] values) {
+        int maxValueIndex = 0;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] > values[maxValueIndex]) {
+                maxValueIndex = i;
+            }
+        }
+        return maxValueIndex;
+    }
+    
+    
+    public char mostCommonCharIn(HashSet<String> dictionary) {
+        char mostCommonChar = 'e';
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        // Frequency array for storing which Character is occurs how many times
+        int[] frequencyArray = new int[26];
+        Arrays.fill(frequencyArray, 0);  
+        for (String word : dictionary) {
+            for (int i=0; i < word.length(); i++) {
+                char currentCharacter = word.charAt(i);
+                int charIndexInAlphabet = alphabet.indexOf(currentCharacter);
+                if (charIndexInAlphabet != -1) {
+                    frequencyArray[charIndexInAlphabet] += 1;
+                }
+            }
+        }
+        int mostCommonCharIndex = maxIndex(frequencyArray);
+        mostCommonChar = alphabet.charAt(mostCommonCharIndex);
+        return mostCommonChar;
+    }
+    
+   
     public void tester() {
         System.out.println("Testing sliceString");
         String message;
@@ -138,18 +176,9 @@ public class VigenereBreaker {
         System.out.println(Arrays.toString(keys));
         System.out.println("readDictionary:");        
         HashSet<String> dictionary = readDictionary(new FileResource());
-        System.out.println(countWords("Buono giornata",dictionary));
-        System.out.println("breakForLanguage:");
+        System.out.println("mostCommonCharIn:");        
+        System.out.println(mostCommonCharIn(dictionary));        
         
-        VigenereCipher newvigenere = new VigenereCipher(keys);
-        System.out.println(newvigenere.encrypt("Saluti"));
-        
-        System.out.println(breakForLanguage(encrypted, dictionary));        
-        
-        
-        //VigenereCipher newvigenere = new VigenereCipher(key);
-        
-        //System.out.println(newvigenere.decrypt(frr)); 
         
     }
 }
