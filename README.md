@@ -19,7 +19,7 @@
 
 Davide Nastri – [@pitto](https://twitter.com/pitto) – d.nastri@gmail.com
 
-Distributed under the GPL license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
 [https://github.com/ltpitt/java-breaking-the-vigenere-cipher](https://github.com/ltpitt/)
 
